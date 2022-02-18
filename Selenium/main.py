@@ -2,12 +2,15 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
+import json
 
 class InstagramBot:
     def __init__(self):
         options = Options()
         options.binary_location="/usr/local/bin/firefox/firefox"
         self.driver = webdriver.Firefox(executable_path="/home/garga/Projects/Python/Selenium/geckodriver", options=options) 
+        self.count=0
+        self.user = self.read_json()
 
     def click_element(self, xpath):
         element = self.driver.find_element(By.XPATH, xpath)
@@ -61,8 +64,6 @@ class InstagramBot:
     def find_account(self):
         ################# FIND USER #################
         try:
-            user = self.manual_input("Enter the desired username:")
-
             try:
                 #SELECT DIV ABOVE
                 self.click_element("/html/body/div[1]/section/nav/div[2]/div/div/div[2]/div[1]/div")
@@ -76,25 +77,30 @@ class InstagramBot:
 
             #ENTER USERNAME
             element.clear()
-            element.send_keys(user)
+            print(f'\n\n{self.user[self.count]}\n\n')
+            element.send_keys(str(self.user[self.count]))
+            self.count+=1
             sleep(1)
 
             #SELECT DIV
             element = self.click_element("/html/body/div[1]/section/nav/div[2]/div/div/div[2]/div[3]/div/div[2]/div/div/a/div/div[2]/div[1]/div/div")
             sleep(2)
         except:
+            sleep(2)
+            self.driver.get("https://www.instagram.com/")
+            sleep(2)
             self.find_account()
 
     def follow(self):
         try:
             #SEND MESSAGE
             self.driver.find_element(By.XPATH, "/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button/div/div/span")
-            self.send_message()
+            #self.send_message()
         except:
             #FOLLOW
             self.click_element("/html/body/div[1]/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button/div")
             sleep(1)
-            self.send_message()
+            #self.send_message()
 
     def send_message(self):
         #CLICK IN MESSAGE BUTTON
@@ -109,14 +115,24 @@ class InstagramBot:
         #INPUT TEXT
         element.send_keys("Olá, Gabriel! Vim por meio do seu bot do Instagram...")
 
+    def read_json(self):
+        with open('users.json') as file:
+            data = json.load(file)
+            user = []
+            for i in range(0, len(data)):
+                user.append(data[i]['username'])
+            file.close()
+        return user
+
 #DEFINE BOT
 bot = InstagramBot()
 
 #SIGN IN
 bot.login()        
 
-#FIND ACCOUNT
-bot.find_account()
+for i in range(0,2): #2 -> NUMBER OF ACCOUNTS
+    #FIND ACCOUNT
+    bot.find_account()
 
-#FOLLOW
-bot.follow()
+    #FOLLOW
+    bot.follow()
