@@ -1,0 +1,18 @@
+1645132834208	geckodriver	INFO	Listening on 127.0.0.1:59731
+1645132834712	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox/firefox" "--marionette" "--remote-debugging-port" "39037" "-no-remote" "-profile" "/tmp/rust_mozprofile70YEZh"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1645132835719	Marionette	INFO	Marionette enabled
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile70YEZh/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:39037/devtools/browser/e872e43a-93e6-4a12-a7b7-07fe5b979348
+1645132841386	Marionette	INFO	Listening on port 46663
+1645132841624	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.instagram.com"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.instagram.com"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1645133048150	Marionette	INFO	Stopped listening on port 46663
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
