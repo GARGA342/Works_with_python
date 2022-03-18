@@ -7,8 +7,8 @@ import json
 class InstagramBot:
     def __init__(self):
         options = Options()
-        options.binary_location="/usr/local/bin/firefox/firefox"
-        self.driver = webdriver.Firefox(executable_path="/home/garga/Projects/Python/Selenium/geckodriver", options=options) 
+        options.binary_location="*PATH TO FIREFOX*"
+        self.driver = webdriver.Firefox(executable_path="*PATH TO GECKODRIVER*", options=options) 
         self.count=0
         self.user = self.read_json()
 
